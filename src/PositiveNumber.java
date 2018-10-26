@@ -20,7 +20,7 @@ public class PositiveNumber {
 		
 		for(int i=0;i<values.length;i++) {
 			int pow = Math.round(Math.round(Math.pow(16, values.length-1-i))); //Stelle des Zeichens in der Hex Zahl um mit 16^Stelle zu multiplizieren
-			if(values[i]=='0'); //Die einzelnen möglichen Hex-Werte werden abgefragt
+			if(values[i]=='0'); //Die einzelnen moeglichen Hex-Werte werden abgefragt
 			else if(values[i]=='1')tmpVal += 1*pow; // und dann wie zuvor genannt mit pow multipliziert multipliziert
 			else if(values[i]=='2')tmpVal += 2*pow;
 			else if(values[i]=='3')tmpVal += 3*pow;
@@ -45,8 +45,24 @@ public class PositiveNumber {
 		catch(ArithmeticException e) {System.out.println("nicht erlaubte Zahlengroesse");}
 	}
 
+	/**
+	 * Wandelt den Input s ins Dezimalsystem um, und setzt den internen Wert value zum Dezimalwert der uebergebenen Binaerzahl s
+	 * @param s
+	 */
 	public void setBinary(String s) {
-		// TODO
+		int i = s.length()-1;
+		int exp = 0;
+		int tmp = 0;
+		
+		while(i >= 0) {
+			if(s.charAt(i) == '1') {
+				tmp += (int)Math.pow(2, exp);
+			}			
+			exp++;
+			i--;
+		}
+		
+		this.value = tmp;
 	}
 
 	/*
@@ -136,9 +152,18 @@ public class PositiveNumber {
 		return res; //String mit allen Hex-Werten wird zurueckgegeben
 	}
 
+	/**
+	 * Gibt den aktuellen Wert als Binaerdarstellung zurueck
+	 * @return ergebnis
+	 */
 	public String getBinary() {
-
-		return intToBin(value);
+		String ergebnis = "";
+		int temp = this.value;
+		do {
+			ergebnis = (temp % 2) + ergebnis;
+			temp = temp / 2;
+		} while (temp != 0);
+		return ergebnis; 
 	}
 
 	/*
@@ -146,14 +171,14 @@ public class PositiveNumber {
 	 * nutzt den euklidischen Algorithmus.
 	 * und fuegt rueckwaerts die Werte an den String an, um direkt die richtige Reihenfolge zu erlangen. 
 	 */
-	private String intToBin(int pZahl) {
-		String l = ""; 
-		int bin = pZahl % 2; 
-		int zahl = pZahl / 2;
-		if (zahl != 0)
-			l += (intToBin(zahl));
-		l += bin;
-		return l;
-	}
+//	private String intToBin(int pZahl) {
+//		String l = ""; 
+//		int bin = pZahl % 2; 
+//		int zahl = pZahl / 2;
+//		if (zahl != 0)
+//			l += (intToBin(zahl));
+//		l += bin;
+//		return l;
+//	}
 
 }
