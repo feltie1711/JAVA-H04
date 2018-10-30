@@ -7,7 +7,10 @@ public class PositiveNumber {
 	}
 
 	public void setDecimal(String s) {
-		// TODO
+		try{
+			value = Integer.parseInt(s);
+		}
+		catch(Exception e){e.printStackTrace();}
 	}
 /*
  * rechnet den uebergebenen hex-Wert in eine Dezimalzahl um
